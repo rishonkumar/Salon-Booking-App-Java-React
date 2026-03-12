@@ -1,7 +1,9 @@
 package com.salon.User.service.controller;
 
 import com.salon.User.service.model.User;
+import com.salon.User.service.payload.response.UserException;
 import com.salon.User.service.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +17,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/api/users")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody @Valid User user) {
         return userRepository.save(user);
     }
 
@@ -31,7 +33,7 @@ public class UserController {
         if(res.isPresent()) {
             return res.get();
         }
-        throw  new Exception("User not found");
+        throw  new UserException("User not found");
     }
 
     @PutMapping("/api/users/{id}")
@@ -40,7 +42,7 @@ public class UserController {
         Optional<User>res = userRepository.findById(id);
 
         if(res.isEmpty()) {
-            throw  new Exception("User not found");
+            throw  new UserException("User not found");
         }
 
         User existingUser = res.get();
@@ -57,7 +59,7 @@ public class UserController {
         Optional<User>res = userRepository.findById(id);
 
         if(res.isEmpty()) {
-            throw  new Exception("User not found with id " + id);
+            throw  new UserException("User not found with id " + id);
         }
 
         userRepository.deleteById(res.get().getId());
