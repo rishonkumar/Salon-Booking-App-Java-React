@@ -59,6 +59,7 @@ public class UserService implements com.salon.User.service.service.UserService {
         existingUser.setFullName(user.getFullName());
         existingUser.setEmail(user.getEmail());
         existingUser.setRole(user.getRole());
+        existingUser.setUserName(user.getUserName());
 
         return userRepository.save(existingUser);
     }
