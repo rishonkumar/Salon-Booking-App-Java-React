@@ -1,4 +1,4 @@
-package com.salon.salon.service;
+package com.salon.salon_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
